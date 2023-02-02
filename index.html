@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>must-eat restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Questrial&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet"> 
+</head>
+<body>
+    <div id="main">
+        <div id="contents">
+            <h1>must-eat restaurant</h1>
+            <a href="javascript:void(0);" onclick="MoveImg()">Get Srarted</a>
+        </div>
+        <div id="por">
+           
+            <button type='button' id="modal_btn">맛집 등록하기</button>
+            <div class="modal_background"></div>
+            <div class="modal_wrap">
+                <div class="modal_close">
+                <button type="button"> x </button></div>
+                <div class="modal_content">
+                   <form method="post" action="map.html">
+                    장소명 <input type="text" name ="name"> <br>
+                    위치 <select name="location" > 
+                        <option value="02">서울특별시</option>
+                        <option value="032">인천광역시</option>
+                        <option value="031">경기도</option>
+                        <option value="033">강원도</option>
+                        <option value="043">충청북도</option>
+                        <option value="041">충청남도</option>
+                        <option value="044">세종특별자치시</option>
+                        <option value="042">대전광역시</option>
+                        <option value="054">경상북도</option>
+                        <option value="055">경상남도</option>
+                        <option value="053">대구광역시</option>
+                        <option value="063">전라북도</option>
+                        <option value="061">전라남도</option>
+                        <option value="062">광주광역시</option>
+                        <option value="052">울산광역시</option>
+                        <option value="051">부산광역시</option>
+                        <option value="064">제주도</option>
+                          <br>
+                    
+                    <!-- 우리의 후기 <textarea id="input_id_33" maxlength="3000" rows="6" class="tf_fiy"></textarea><br> -->
+                   <button type="submit">등록</button>
+                </form>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    
+    <script>
+
+function MoveImg()
+{ 
+  document.getElementById("main").style.backgroundImage = "url('./img/map.JPG')"; 
+  document.getElementById("main").style.backgroundSize = " 840px";
+  document.getElementById("contents").style.display ="none";
+  document.getElementById("por").style.display ="block";
+ 
+}
+
+// 모달 열기
+function modalOpen() {
+    document.querySelector('.modal_wrap').style.display = 'block';
+    document.querySelector('.modal_background').style.display = 'block';
+}
+
+// 모달 끄기
+function modalClose() {
+    document.querySelector('.modal_wrap').style.display = 'none';
+    document.querySelector('.modal_background').style.display = 'none';
+}
+
+
+//버튼 클릭리스너 달기
+document.querySelector('#modal_btn').addEventListener('click', modalOpen);
+document.querySelector('.modal_close').addEventListener('click', modalClose);
+    </script>
+</body>
+</html>
