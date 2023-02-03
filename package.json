@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "ms_list",
+  "version": "1.0.0",
+  "main": "db.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyunah96/must-eat-restaurant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyunah96/must-eat-restaurant/issues"
+  },
+  "homepage": "https://github.com/hyunah96/must-eat-restaurant#readme",
+  "description": ""
+}

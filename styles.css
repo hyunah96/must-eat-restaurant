@@ -105,3 +105,10 @@ a
 {
     font-size: 30px;
 }
+textarea {
+    width: 90%;
+    height: 7em;
+    border: none;
+    resize: none;
+   margin-left: 5px;
+  }

@@ -44,9 +44,10 @@
                         <option value="052">울산광역시</option>
                         <option value="051">부산광역시</option>
                         <option value="064">제주도</option>
-                          <br>
-                    
-                    <!-- 우리의 후기 <textarea id="input_id_33" maxlength="3000" rows="6" class="tf_fiy"></textarea><br> -->
+                         
+                          </select><br>
+                          이미지<input type ="file"><br>
+                    리뷰 <textarea id="input_id_33" maxlength="3000" rows="6" class="tf_fiy"></textarea><br>
                    <button type="submit">등록</button>
                 </form>
                 </div>
@@ -82,6 +83,23 @@ function modalClose() {
 //버튼 클릭리스너 달기
 document.querySelector('#modal_btn').addEventListener('click', modalOpen);
 document.querySelector('.modal_close').addEventListener('click', modalClose);
+
+//좌표 구하기
+// function xyEvent(evt){
+
+// alert("X = " + evt.screenX + ", Y = " + evt.screenY );
+
+// }
+// function clickEvent() {
+//        // 브라우저 호환(크로스브라우징)을 위해 메소드 제공 여부를 체크 합니다.
+//        if ( document.addEventListener ) {
+//           document.addEventListener("click",xyEvent,false);
+//        } else {
+//           document.attachEvent("onclick",xyEvent);
+//        }
+//     } 
+//     window.onload = clickEvent();
+    //좌표 구하기
     </script>
 </body>
 </html>
