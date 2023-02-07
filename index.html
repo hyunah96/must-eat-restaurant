@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>must-eat restaurant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Questrial&display=swap" rel="stylesheet">
-<link href="styles.css" rel="stylesheet"> 
+
+<link rel="stylesheet" href="/styles.css" />
+<!--test-->
+<link rel="stylesheet" href="/korea.css" />
+<script type="text/javascript" src="/d3.js"></script>
+<script type="text/javascript" src="/korea.js"></script>
+<!--test-->
+<!--제이쿼리-->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
     <div id="main">
@@ -16,17 +23,17 @@
             <h1>must-eat restaurant</h1>
             <a href="javascript:void(0);" onclick="MoveImg()">Get Srarted</a>
         </div>
-        <div id="por">
-           
+        
             <button type='button' id="modal_btn">맛집 등록하기</button>
+            <div class="mo">마우스 좌표</div>
             <div class="modal_background"></div>
             <div class="modal_wrap">
                 <div class="modal_close">
                 <button type="button"> x </button></div>
                 <div class="modal_content">
-                   <form method="post" action="map.html">
+                   <form action="ajax" method="POST" >
                     장소명 <input type="text" name ="name"> <br>
-                    위치 <select name="location" > 
+                    지역 <select id="location" > 
                         <option value="02">서울특별시</option>
                         <option value="032">인천광역시</option>
                         <option value="031">경기도</option>
@@ -46,9 +53,10 @@
                         <option value="064">제주도</option>
                          
                           </select><br>
-                          이미지<input type ="file"><br>
-                    리뷰 <textarea id="input_id_33" maxlength="3000" rows="6" class="tf_fiy"></textarea><br>
-                   <button type="submit">등록</button>
+                          이미지<input type ="file" id="img"><br>
+                    리뷰 <textarea id="input_text" maxlength="3000" rows="6"></textarea><br>
+                    <div class="result"></div>
+                   <button type="submit" class="smit" >등록</button>
                 </form>
                 </div>
             </div>
@@ -60,12 +68,29 @@
 
 function MoveImg()
 { 
-  document.getElementById("main").style.backgroundImage = "url('./img/map.JPG')"; 
-  document.getElementById("main").style.backgroundSize = " 840px";
+  //document.getElementById("main").style.backgroundImage = "url('/map.jpg')"; 
+  document.getElementById("main").style.backgroundImage = "url('/southKoreaLow.svg')"; 
+  //document.getElementById("main").style.marginLeft = "500px";
+  document.getElementById("main").style.display = "flex";
   document.getElementById("contents").style.display ="none";
   document.getElementById("por").style.display ="block";
+
+   ////////////////////////
+   document.getElementById("main").addEventListener("mousemove",function(event){
+            console.log("mousemove!");
+            console.log(event)
+            let x = event.offsetX;
+            let y = event.offsetY;
+    /*
+        이벤트가 일어난 좌표를
+        "x 좌표:100 y좌표:200" 형식의 문자열로 만들어서
+        위의 div의 innerText로 출력해보세요
+    */
+           document.querySelector(".mo").innerText = "x 좌표:"+x+"y 좌표:"+y;
+        });
  
 }
+
 
 // 모달 열기
 function modalOpen() {
@@ -84,22 +109,37 @@ function modalClose() {
 document.querySelector('#modal_btn').addEventListener('click', modalOpen);
 document.querySelector('.modal_close').addEventListener('click', modalClose);
 
-//좌표 구하기
-// function xyEvent(evt){
 
-// alert("X = " + evt.screenX + ", Y = " + evt.screenY );
+     //ajaxbutton을 눌렀을 때 실행되는 함수
+    
+     document.querySelector('.smit').addEventListener('click', function () {
+        event.preventDefault();
+            var inputdata = 'han'
+            sendAjax('http://localhost:3000/ajax', inputdata)
+        })
+		//send함수 'http://localhost:3000/ajax'주소에 inputdata를 보냅니다.
+        function sendAjax(url, data) {
 
-// }
-// function clickEvent() {
-//        // 브라우저 호환(크로스브라우징)을 위해 메소드 제공 여부를 체크 합니다.
-//        if ( document.addEventListener ) {
-//           document.addEventListener("click",xyEvent,false);
-//        } else {
-//           document.attachEvent("onclick",xyEvent);
-//        }
-//     } 
-//     window.onload = clickEvent();
-    //좌표 구하기
+            var data = { 'name': data };
+            data = JSON.stringify(data);
+            
+    		//data에 inputdata를 json형식으로 넣고 이를 xmlhttprequest를 통해 post방식으로 보냅니다.
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-type', "application/json");
+            xhr.send(data);
+			
+            //서버에서 결과가 도착하면 그것을 result div에 입력합니다.
+            xhr.addEventListener('load', function () {
+             
+               document.querySelector(".result").innerHTML = xhr.responseText;
+               //window.location.replace("/");
+            });
+        }
+           
+
+ 
+
     </script>
 </body>
 </html>

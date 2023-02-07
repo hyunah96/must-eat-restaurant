@@ -1,22 +1,55 @@
-// 서버 사용을 위해 http모듈을 http라는 변수에 담음
-var http = require('http');
-var fs = require('fs');
+var express = require('express');
+const path = require("path");
+var bodyParser = require('body-parser');
+var app = express();
+app.use(express.json()); 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+//cors정책을 피하기 위한 모듈
+const cors = require('cors')
+app.use(cors());
 
-// http모듈로 서버 생성 
-var app = http.createServer(function(req,res){
-  var url = req.url;
-    if(req.url == '/'){
-      url = '/index.html';
-    }
-    if(req.url == '/favicon.ico'){
-      return res.writeHead(404);
-    }
-    res.writeHead(200);
-    res.end(fs.readFileSync(__dirname + url));
- 
+var mysql      = require('mysql');
+const { query, response, Router } = require('express');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'kgb0563',
+  database : 'test'
+});
+// 3000 포트로 서버 오픈
+app.listen(3000, function() {
+    console.log("server is running")
 });
 
-// listen 함수로 3000 포트에 서버 실행
-app.listen(3000, function(){
-  console.log("server is running.")
+
+//public 폴더의 내용을 읽겠다
+app.use(express.static('public'));
+
+//메인 페이지를 index.html
+app.get('/', function(req,res) {
+  res.sendFile(__dirname + "/index.html")
 });
+
+app.get('/korea', function(req,res) {
+  res.sendFile(__dirname + "/korea.html")
+});
+
+app.post('/ajax',function(req,res){
+  var sql = 'SELECT * FROM test.user';
+  
+  //var responseData = `hi ${req.body.name} i'm balmostory`;
+  //res.json(responseData);
+connection.query(sql, function(error,results){
+  res.json(results);
+  console.log(results);
+  
+  });
+  /* var name = req.body.name;
+  console.log(name);*/
+});
+
+
+ /* var name = req.body.name;
+  console.log(name);*/
+

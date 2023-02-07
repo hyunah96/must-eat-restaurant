@@ -10,7 +10,9 @@ connection.connect();
  
 connection.query('SELECT * FROM test.user', function (error, results, fields) {
   if (error) throw error;
-  console.log('users : ', results);
+  console.log('결과는 : ', results);
 });
+
  
 connection.end();
+
