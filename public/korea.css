@@ -3,17 +3,14 @@ body
 {
     margin: 0;
     padding: 0;
-	color: #009300;
-	
 
 }
-#container {
-	width: 700px;
-	min-height: 700px;
-	float: right;
-	
-	
-	/*margin: 15px 35px;*/
+
+#modal_btn {
+ position: relative;
+float: right;
+margin-top: 70px;
+margin-right: 130px;
 }
 #states path {
 	fill: #585858;
